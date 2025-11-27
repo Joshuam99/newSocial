@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SocialNetWork" Class="ConLinQDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Function Name="dbo.COUNT_FOLLOWERS" Method="COUNT_FOLLOWERS">
+    <Parameter Name="userID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FollowersCount" Parameter="followersCount" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.COUNT_FOLLOWING" Method="COUNT_FOLLOWING">
+    <Parameter Name="userID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FollowingCount" Parameter="followingCount" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.COUNT_LIKES" Method="COUNT_LIKES">
+    <Parameter Name="PostId" Parameter="postId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LikesCount" Parameter="likesCount" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.FOLLOW_AND_UNFOLLOW" Method="FOLLOW_AND_UNFOLLOW">
+    <Parameter Name="followerUserId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="followedUserId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ERRORID" Parameter="eRRORID" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ERRORDESCRIPCION" Parameter="eRRORDESCRIPCION" Type="System.String" DbType="NVarChar(MAX)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.LIKE_POST" Method="LIKE_POST">
+    <Parameter Name="likingUserId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PostID" Parameter="postID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RESULT" Parameter="rESULT" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="DESCRIPTION" Parameter="dESCRIPTION" Type="System.String" DbType="VarChar(250)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.LOAD_POSTS" Method="LOAD_POSTS">
+    <Parameter Name="post_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ERRORID" Parameter="eRRORID" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ERRORDESCRIPCION" Parameter="eRRORDESCRIPCION" Type="System.String" DbType="NVarChar(MAX)" Direction="InOut" />
+    <ElementType Name="LOAD_POSTSResult">
+      <Column Name="post_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="created_by_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="create_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="caption" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="post_image" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.REGISTER_USER" Method="REGISTER_USER">
+    <Parameter Name="users_name" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="last_name" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="username" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="u_email" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="user_password" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="sign_up_date" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="IDRETURN" Parameter="iDRETURN" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ERRORID" Parameter="eRRORID" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ERRORDESCRIPCION" Parameter="eRRORDESCRIPCION" Type="System.String" DbType="NVarChar(MAX)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SEARCH_USER" Method="SEARCH_USER">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="userfound" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="usernameFound" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="userID" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UPLOAD_POST" Method="UPLOAD_POST">
+    <Parameter Name="created_by_user_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="caption" Type="System.String" DbType="VarChar(500)" />
+    <Parameter Name="post_image" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" />
+    <Parameter Name="resultID" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ERRORDESCRIPCION" Parameter="eRRORDESCRIPCION" Type="System.String" DbType="NVarChar(MAX)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetPostsFromFollowedUsersWithLikes" Method="GetPostsFromFollowedUsersWithLikes">
+    <Parameter Name="loggedInUserId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DESCRIPTION" Parameter="dESCRIPTION" Type="System.String" DbType="VarChar(250)" Direction="InOut" />
+    <Parameter Name="RESULT" Parameter="rESULT" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="GetPostsFromFollowedUsersWithLikesResult">
+      <Column Name="post_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="post_image" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" />
+      <Column Name="caption" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="likes_count" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.LOAD_USER_PROFILE" Method="LOAD_USER_PROFILE">
+    <Parameter Name="userID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Username" Parameter="username" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="FollowingCount" Parameter="followingCount" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="FollowerCount" Parameter="followerCount" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="Result" Parameter="result" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NVarChar(MAX)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.LOGIN_USER" Method="LOGIN_USER">
+    <Parameter Name="u_email" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="u_password" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="user_can_access" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.LOAD_PROFILE_PICTURES" Method="LOAD_PROFILE_PICTURES">
+    <Parameter Name="USER_ID" Parameter="uSER_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RESULT" Parameter="rESULT" Type="System.String" DbType="VarChar(250)" Direction="InOut" />
+    <Parameter Name="DESCRIPTION" Parameter="dESCRIPTION" Type="System.String" DbType="VarChar(250)" Direction="InOut" />
+    <ElementType Name="LOAD_PROFILE_PICTURESResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="post_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="post_image" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>
